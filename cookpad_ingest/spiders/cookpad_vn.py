@@ -79,6 +79,10 @@ class CookpadIdScanSpider(scrapy.Spider):
         )
 
         # 1) HTTP không OK -> ghi nhận và đi tiếp
+        # 1) BỎ QUA 404 HOÀN TOÀN
+        if status == 404:
+            return
+        # 2) CÁC STATUS KHÁC VẪN GHI STAGING
         if status != 200:
             yield self._with_status(
                 base,
